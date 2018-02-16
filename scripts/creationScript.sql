@@ -107,6 +107,27 @@ VALUES
 /*!40000 ALTER TABLE `CLIENTES` ENABLE KEYS */;
 UNLOCK TABLES;
 
+# Dump of table PACIENTES
+# ------------------------------------------------------------
+
+CREATE TABLE `PACIENTES` (
+  `id` int(11) NOT NULL,
+  `tipo_id` enum('cc','ce','rc','ti') COLLATE latin1_general_ci NOT NULL,
+  `nombre` varchar(45) COLLATE latin1_general_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  PRIMARY KEY (`id`,`tipo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+LOCK TABLES `PACIENTES` WRITE;
+/*!40000 ALTER TABLE `PACIENTES` DISABLE KEYS */;
+
+INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`)
+VALUES
+	(1,'cc','jhon','2015-02-02');
+
+/*!40000 ALTER TABLE `PACIENTES` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 # Dump of table CONSULTAS
 # ------------------------------------------------------------
@@ -1273,27 +1294,75 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table PACIENTES
+# Dump of table TIPOS_POLIZA
 # ------------------------------------------------------------
 
-CREATE TABLE `PACIENTES` (
-  `id` int(11) NOT NULL,
-  `tipo_id` enum('cc','ce','rc','ti') COLLATE latin1_general_ci NOT NULL,
+CREATE TABLE `TIPOS_POLIZA` (
+  `codigo_poliza` int(11) NOT NULL,
   `nombre` varchar(45) COLLATE latin1_general_ci NOT NULL,
-  `fecha_nacimiento` date NOT NULL,
-  PRIMARY KEY (`id`,`tipo_id`)
+  `descripcion` varchar(45) COLLATE latin1_general_ci NOT NULL,
+  `monto_maximo` bigint(20) NOT NULL,
+  PRIMARY KEY (`codigo_poliza`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-LOCK TABLES `PACIENTES` WRITE;
-/*!40000 ALTER TABLE `PACIENTES` DISABLE KEYS */;
+LOCK TABLES `TIPOS_POLIZA` WRITE;
+/*!40000 ALTER TABLE `TIPOS_POLIZA` DISABLE KEYS */;
 
-INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`)
+INSERT INTO `TIPOS_POLIZA` (`codigo_poliza`, `nombre`, `descripcion`, `monto_maximo`)
 VALUES
-	(1,'cc','jhon','2015-02-02');
+	(-1500496538,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-1500393573,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-1499201057,'polizaFachada','Esta es una poliza de fachada',25),
+	(-1499200317,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-912883511,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-912876506,'polizaFachada','Esta es una poliza de fachada',25),
+	(-912358767,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-912355969,'polizaFachada','Esta es una poliza de fachada',25),
+	(-909842331,'polizaFachada','Esta es una poliza de fachada',25),
+	(-909839238,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-908989367,'polizaFachada','Esta es una poliza de fachada',25),
+	(-908987538,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-907096764,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(-907095185,'polizaFachada','Esta es una poliza de fachada',25),
+	(0,'fachadaOpDiego','fachadaOpDiego',888),
+	(1,'Seguro Social','Recuperar pacientes',50000),
+	(2,'Theft Policy','Poliza contra Robo',2800000),
+	(3,'Seguros Don Barredora','Yo soy don barredora y vengo a limpiar, la en',1000000),
+	(38,'jajja','ddddddd',2000),
+	(48,'jajja','ddddddd',2000),
+	(55,'diegoPrueba','poliza de prueba',2000),
+	(101,'arrendamientoo','tipo de poliza ',55555),
+	(111,'p1','La poli',2312321),
+	(123,'p1','la poliza 444',22),
+	(201,'Seguro Social','Recuperar pacientes',500000),
+	(355,'arrendamientoo','tipo de poliza ',444),
+	(444,'p1','la poliza 444',22),
+	(445,'p1','la poliza 444',22),
+	(601,'Seguro Social','Recuperar pacientes',500000),
+	(888,'arrendamientoo','tipo de poliza ',444),
+	(1000,'Poliza prueba','... descripción',12000000),
+	(2000,'jajja','ddddddd',2000),
+	(2212,'p1','la poliza 444',22),
+	(3000,'jajja','ddddddd',2000),
+	(3332,'p1','la poliza 444',22),
+	(3548,'jajja','ddddddd',2000),
+	(3569,'Seguro','nnnnnn',900000),
+	(22221,'p1','la poliza 444',22),
+	(33322,'p1','LA PRUEBA',22),
+	(102037,'fachada','fachada',5852),
+	(102038,'fachada','fachada',5852),
+	(102039,'fachada','fachadaRest',5852),
+	(122221,'p1','la poliza 444',22),
+	(201536,'p1','La poli2',2312321),
+	(333221,'p1','LA PRUEBA',22),
+	(333222,'p1','LA PRUEBA',22),
+	(553324,'p1','la poliza 444',22),
+	(999999,'NuevaPoliza','Esta es una nueva Poliza',25),
+	(1020372,'dPTans','poliza de prueba trans',8050),
+	(123451267,'Poliza_Accidente','Descripcion',500000);
 
-/*!40000 ALTER TABLE `PACIENTES` ENABLE KEYS */;
+/*!40000 ALTER TABLE `TIPOS_POLIZA` ENABLE KEYS */;
 UNLOCK TABLES;
-
 
 # Dump of table POLIZAS_APROBADAS
 # ------------------------------------------------------------
@@ -1374,80 +1443,7 @@ VALUES
 /*!40000 ALTER TABLE `POLIZAS_APROBADAS` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-# Dump of table TIPOS_POLIZA
-# ------------------------------------------------------------
-
-CREATE TABLE `TIPOS_POLIZA` (
-  `codigo_poliza` int(11) NOT NULL,
-  `nombre` varchar(45) COLLATE latin1_general_ci NOT NULL,
-  `descripcion` varchar(45) COLLATE latin1_general_ci NOT NULL,
-  `monto_maximo` bigint(20) NOT NULL,
-  PRIMARY KEY (`codigo_poliza`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
-LOCK TABLES `TIPOS_POLIZA` WRITE;
-/*!40000 ALTER TABLE `TIPOS_POLIZA` DISABLE KEYS */;
-
-INSERT INTO `TIPOS_POLIZA` (`codigo_poliza`, `nombre`, `descripcion`, `monto_maximo`)
-VALUES
-	(-1500496538,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-1500393573,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-1499201057,'polizaFachada','Esta es una poliza de fachada',25),
-	(-1499200317,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-912883511,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-912876506,'polizaFachada','Esta es una poliza de fachada',25),
-	(-912358767,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-912355969,'polizaFachada','Esta es una poliza de fachada',25),
-	(-909842331,'polizaFachada','Esta es una poliza de fachada',25),
-	(-909839238,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-908989367,'polizaFachada','Esta es una poliza de fachada',25),
-	(-908987538,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-907096764,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(-907095185,'polizaFachada','Esta es una poliza de fachada',25),
-	(0,'fachadaOpDiego','fachadaOpDiego',888),
-	(1,'Seguro Social','Recuperar pacientes',50000),
-	(2,'Theft Policy','Poliza contra Robo',2800000),
-	(3,'Seguros Don Barredora','Yo soy don barredora y vengo a limpiar, la en',1000000),
-	(38,'jajja','ddddddd',2000),
-	(48,'jajja','ddddddd',2000),
-	(55,'diegoPrueba','poliza de prueba',2000),
-	(101,'arrendamientoo','tipo de poliza ',55555),
-	(111,'p1','La poli',2312321),
-	(123,'p1','la poliza 444',22),
-	(201,'Seguro Social','Recuperar pacientes',500000),
-	(355,'arrendamientoo','tipo de poliza ',444),
-	(444,'p1','la poliza 444',22),
-	(445,'p1','la poliza 444',22),
-	(601,'Seguro Social','Recuperar pacientes',500000),
-	(888,'arrendamientoo','tipo de poliza ',444),
-	(1000,'Poliza prueba','... descripción',12000000),
-	(2000,'jajja','ddddddd',2000),
-	(2212,'p1','la poliza 444',22),
-	(3000,'jajja','ddddddd',2000),
-	(3332,'p1','la poliza 444',22),
-	(3548,'jajja','ddddddd',2000),
-	(3569,'Seguro','nnnnnn',900000),
-	(22221,'p1','la poliza 444',22),
-	(33322,'p1','LA PRUEBA',22),
-	(102037,'fachada','fachada',5852),
-	(102038,'fachada','fachada',5852),
-	(102039,'fachada','fachadaRest',5852),
-	(122221,'p1','la poliza 444',22),
-	(201536,'p1','La poli2',2312321),
-	(333221,'p1','LA PRUEBA',22),
-	(333222,'p1','LA PRUEBA',22),
-	(553324,'p1','la poliza 444',22),
-	(999999,'NuevaPoliza','Esta es una nueva Poliza',25),
-	(1020372,'dPTans','poliza de prueba trans',8050),
-	(123451267,'Poliza_Accidente','Descripcion',500000);
-
-/*!40000 ALTER TABLE `TIPOS_POLIZA` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='' */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

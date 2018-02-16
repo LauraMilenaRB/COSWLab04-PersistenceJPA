@@ -16,12 +16,15 @@
  */
 package edu.eci.cosw.jpa.sample;
 
+import edu.eci.cosw.jpa.sample.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
+import java.util.Date;
 
 /**
  *
@@ -33,7 +36,12 @@ public class SimpleMainApp {
         SessionFactory sf=getSessionFactory();
         Session s=sf.openSession();
         Transaction tx=s.beginTransaction();
-        
+        Cliente client= new Cliente(new ClienteId(5,"cc"),"Laura M Ramos","calle 182","321283555");
+        s.saveOrUpdate(client);
+        TipoPoliza poliza= (TipoPoliza) s.load(TipoPoliza.class,1);
+        s.saveOrUpdate(new PolizaAprobada(new PolizaAprobadaId(5,"cc",1),client,poliza,new Date(),new Date()));
+        PolizaAprobada pol= (PolizaAprobada) s.load(PolizaAprobada.class,new PolizaAprobadaId(5,"cc",1));
+        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+pol.getClientes().getNombre());
         tx.commit();       
         s.close();
         sf.close();
